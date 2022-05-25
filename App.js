@@ -21,6 +21,12 @@ import { SafeArea } from "./src/components/utility/safe-area.component";
 
 const Tab = createBottomTabNavigator();
 
+const TAB_ICON = {
+  Restaurants: "md-restaurant",
+  Settings: "md-settings",
+  Map: "md-map",
+};
+
 const Setting = () => (
   <SafeArea>
     <Text>Settings</Text>
@@ -31,7 +37,18 @@ const Map = () => (
     <Text>Map</Text>
   </SafeArea>
 );
-// const Restaurant = () => <Text>Restaurant</Text>;
+
+const tabBarIcon =
+  (iconName) =>
+  ({ size, color }) =>
+    <Ionicons name={iconName} size={size} color={color} />;
+
+const createScreenOptions = ({ route }) => {
+  const iconName = TAB_ICON[route.name];
+  return {
+    tabBarIcon: tabBarIcon(iconName),
+  };
+};
 
 export default function App() {
   const [oswaldLoaded] = useOswald({
@@ -50,26 +67,7 @@ export default function App() {
     <>
       <ThemeProvider theme={theme}>
         <NavigationContainer>
-          <Tab.Navigator
-            screenOptions={({ route }) => ({
-              tabBarIcon: ({ color, size }) => {
-                let iconName;
-
-                if (route.name === "Restaurants") {
-                  iconName = "md-restaurant";
-                } else if (route.name === "Settings") {
-                  iconName = "md-settings";
-                } else if (route.name === "Map") {
-                  iconName = "md-map";
-                }
-
-                // You can return any component that you like here!
-                return <Ionicons name={iconName} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: "tomato",
-              tabBarInactiveTintColor: "gray",
-            })}
-          >
+          <Tab.Navigator screenOptions={createScreenOptions}>
             <Tab.Screen name="Restaurants" component={RestaurantsScreen} />
             <Tab.Screen name="Map" component={Map} />
             <Tab.Screen name="Settings" component={Setting} />
