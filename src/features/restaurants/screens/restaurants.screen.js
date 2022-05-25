@@ -10,6 +10,7 @@ import { Spacer } from "../../../components/spacer/spacer.component";
 
 const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
+  padding-top: 1px;
 `;
 
 const RestaurantList = styled(FlatList).attrs({
