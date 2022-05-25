@@ -16,11 +16,20 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 // COMPONENTS
 import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
 import { theme } from "./src/infrastructure/theme";
+import { SafeArea } from "./src/components/utility/safe-area.component";
 
 const Tab = createBottomTabNavigator();
 
-const Setting = () => <Text>Settings</Text>;
-const Map = () => <Text>Map</Text>;
+const Setting = () => (
+  <SafeArea>
+    <Text>Settings</Text>
+  </SafeArea>
+);
+const Map = () => (
+  <SafeArea>
+    <Text>Map</Text>
+  </SafeArea>
+);
 // const Restaurant = () => <Text>Restaurant</Text>;
 
 export default function App() {
