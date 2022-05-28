@@ -1,5 +1,3 @@
-// import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
-
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -42,7 +40,7 @@ const createScreenOptions = ({ route }) => {
 export const AppNavigator = () => (
   <NavigationContainer>
     <Tab.Navigator
-      screenOptions={createScreenOptions}
+      screenOptions={{ createScreenOptions, headerShown: false }}
       tabBarOptions={{
         activeTintColor: "tomato",
         inactiveTintColor: "gray",

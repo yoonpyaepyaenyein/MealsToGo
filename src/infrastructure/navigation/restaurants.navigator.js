@@ -8,7 +8,7 @@ const RestaurantStack = createNativeStackNavigator();
 
 export const RestaurantsNavigator = () => {
   return (
-    <RestaurantStack.Navigator headerMode="none">
+    <RestaurantStack.Navigator>
       <RestaurantStack.Screen
         name="Restaurants"
         component={RestaurantsScreen}
