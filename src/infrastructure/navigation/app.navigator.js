@@ -40,7 +40,7 @@ const createScreenOptions = ({ route }) => {
 export const AppNavigator = () => (
   <NavigationContainer>
     <Tab.Navigator
-      screenOptions={{ createScreenOptions, headerShown: false }}
+      screenOptions={createScreenOptions}
       tabBarOptions={{
         activeTintColor: "tomato",
         inactiveTintColor: "gray",
