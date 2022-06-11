@@ -32,21 +32,26 @@ const firebaseConfig = {
   messagingSenderId: "83277374676",
   appId: "1:83277374676:web:14db27636cf4b1f8fec741",
 };
-firebase.initializeApp(firebaseConfig);
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   useEffect(() => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword("email", "password")
-      .then((user) => {
-        console.log(user);
-        setIsAuthenticated(true);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    setTimeout(() => {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword("ype@binni.io", "123456")
+        .then((user) => {
+          console.log(user);
+          setIsAuthenticated(true);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }, 2000);
   }, []);
 
   const [oswaldLoaded] = useOswald({
@@ -61,6 +66,7 @@ export default function App() {
     return null;
   }
 
+  if (!isAuthenticated) return null;
   return (
     <>
       <ThemeProvider theme={theme}>
