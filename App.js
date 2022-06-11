@@ -1,6 +1,9 @@
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import { ThemeProvider } from "styled-components/native";
+
+import * as firebase from "firebase";
 
 import {
   useFonts as useOswald,
@@ -14,9 +17,38 @@ import { Navigation } from "./src/infrastructure/navigation";
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 
+/*
 import { FavouritesContextProvider } from "./src/services/favourites/favourites.context";
+*/
+
+// Import the functions you need from the SDKs you need
+// import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDnSuoZY9nocGBQT_XI46LNNmnG-35sK3c",
+  authDomain: "meals-to-go-c28d6.firebaseapp.com",
+  projectId: "meals-to-go-c28d6",
+  storageBucket: "meals-to-go-c28d6.appspot.com",
+  messagingSenderId: "83277374676",
+  appId: "1:83277374676:web:14db27636cf4b1f8fec741",
+};
+firebase.initializeApp(firebaseConfig);
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  useEffect(() => {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword("email", "password")
+      .then((user) => {
+        console.log(user);
+        setIsAuthenticated(true);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
@@ -32,13 +64,11 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <FavouritesContextProvider>
-          <LocationContextProvider>
-            <RestaurantsContextProvider>
-              <Navigation />
-            </RestaurantsContextProvider>
-          </LocationContextProvider>
-        </FavouritesContextProvider>
+        <LocationContextProvider>
+          <RestaurantsContextProvider>
+            <Navigation />
+          </RestaurantsContextProvider>
+        </LocationContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
