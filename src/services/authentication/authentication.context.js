@@ -32,12 +32,17 @@ export const AuthenticationContextProvider = ({ children }) => {
       .createUserWithEmailAndPassword(email, password)
       .then((u) => {
         setUser(u);
-        setIsLoading(false);
+        setIsLoading(true);
       })
       .catch((e) => {
         setIsLoading(false);
         setError(e.toString());
       });
+  };
+
+  const onLogout = () => {
+    setUser(null);
+    firebase.auth().signOut();
   };
 
   return (
@@ -49,6 +54,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         error,
         onLogin,
         onRegister,
+        onLogout,
       }}
     >
       {children}
