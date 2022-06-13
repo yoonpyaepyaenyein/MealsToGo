@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
-
-import { ActivityIndicator, Colors, TextInput } from "react-native-paper";
+import { ActivityIndicator, Colors } from "react-native-paper";
 
 import {
   AccountBackground,
@@ -39,13 +38,13 @@ export const LoginScreen = ({ navigation }) => {
             textContentType="password"
             secureTextEntry
             autoCapitalize="none"
-            nChangeText={(p) => setPassword(p)}
+            onChangeText={(p) => setPassword(p)}
           />
         </Spacer>
         {error && (
-          <Spacer size="large">
+          <ErrorContainer size="large">
             <Text variant="error">{error}</Text>
-          </Spacer>
+          </ErrorContainer>
         )}
         <Spacer size="large">
           {!isLoading ? (
