@@ -1,6 +1,7 @@
 import React from "react";
 
 import { SettingsScreen } from "../../features/setting/screens/settings.screen";
+import { CameraScreen } from "../../features/setting/screens/camera.screen";
 
 import {
   createNativeStackNavigator,
@@ -24,6 +25,7 @@ export const SettingsNavigator = ({ route, navigation }) => {
         name="Settings"
         component={SettingsScreen}
       />
+      <SettingsStack.Screen name="Camera" component={CameraScreen} />
     </SettingsStack.Navigator>
   );
 };
